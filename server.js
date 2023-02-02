@@ -13,7 +13,7 @@ app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
 // routes
-app.use('/api/user', userRoutes)
+app.use('/api/users', userRoutes)
 // view engine setup
 app.use(express.static(__dirname + "/views"));
 app.use(express.static(__dirname + "/public"));
