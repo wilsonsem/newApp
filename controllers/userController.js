@@ -26,4 +26,32 @@ exports.userLogin = async(req, res) => {{
     }
 }}
 
+//Regiser a user
+exports.userRegistration = async( req, res) => {
+
+    const { firstName, email, password} = req.body
+
+    const userExist = await User.findOne({ email })
+    if(userExist){
+        res.status(401)
+        throw new Error("User already Exist")
+    }
+
+    const user = await User.create({ firstName, email, password})
+    if(user){
+        res.status(201).json({
+            _id : user._id,
+            firstName : user.firstName,
+            email: user.email,
+            isAdmin: user.isAdmin,
+            token: user.token
+        })
+    }else{
+        res.status(401)
+        throw new Error("Registration failed")
+    }
+
+
+}
+
 module.exports = exports

@@ -7,8 +7,6 @@ const router = express.Router()
 //
 router.get('/', controllers.getUsers)
 router.post('/login', controllers.userLogin)
-router.post('/register', (req, res)=>{
-    res.send("Sign up route")
-})
+router.post('/register', controllers.userRegistration)
 
 module.exports = router
