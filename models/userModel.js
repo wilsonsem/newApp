@@ -23,3 +23,7 @@ const userSchema = new mongoose.Schema({
         required: false,
     }
 },{ timestamps: true})
+
+const User = mongoose.model('USer', userSchema)
+
+module.exports = workout
