@@ -15,6 +15,7 @@ exports.userLogin = async(req, res) => {
     const user = await User.findOne({ email : req.body.email })
 
     if(user && (await user.matchPassword(data.password))){
+        console.log("logged in")
         res.status(200).json({
             _id: user._id,
             firstName: user.firstName,
