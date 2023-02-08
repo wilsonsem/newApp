@@ -1,4 +1,4 @@
-.btn-color{
+/* .btn-color{
     background-color: #0e1c36;
     color: #fff;
     
@@ -18,4 +18,19 @@
   
   a{
     text-decoration: none;
-  }
+  } */
+
+  .navbar-custom{
+    background: #cbe2ec;
+}
+main{
+    height: 84vh;
+    background: #e1f0f7;
+}
+.avt{
+    height: 300px;
+    width: 300px;
+}
+h2,h3{
+    color: rgb(8, 8, 73)!important;
+}
