@@ -1,12 +1,12 @@
 const express = require('express')
 const dotenv = require('dotenv')
 const bodyParser = require ('body-parser')
-const userRoutes = require('./routes/userRoutes.js')
-const authMiddleware = require('./middleware/authMiddleware')
+const userRoutes = require('./routes/userAuthRoute.js')
+const attendanceRoutes = require('./routes/attendanceRoute')
+// const authMiddleware = require('./middleware/authMiddleware')
 const errorMiddleware = require('./middleware/errorMiddleware')
 const connectDb = require('./models/db.js')
 require('./models/db.js')
-// require('ejs')
 dotenv.config()
 
 
@@ -19,19 +19,16 @@ app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
+
+
 //routes
 app.get('/', ( req, res) => {
-    res.render("register")
-})
-app.get('/users/login', ( req, res) => {
-    res.render("login")
+    res.render("index")
 })
 app.use('/users' , userRoutes)
+app.use('/true' , attendanceRoutes) 
+app.use ( errorMiddleware.errorHandler, errorMiddleware.notFound)//middleware
 
-
-//middleware
-app.use ( errorMiddleware.errorHandler, errorMiddleware.notFound)
-//
 
 
 const PORT = process.env.PORT || 8000
