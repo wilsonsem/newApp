@@ -1,25 +1,37 @@
-const express   = require ('express')
-const bodyParser = require('body-parser')
-const userRoutes = require('./routes/userRoutes')
-require('dotenv').config()
-require('colors')
-require ('./models/db')
+const express = require('express')
+const dotenv = require('dotenv')
+const bodyParser = require ('body-parser')
+const userRoutes = require('./routes/userAuthRoute.js')
+const attendanceRoutes = require('./routes/attendanceRoute')
+// const authMiddleware = require('./middleware/authMiddleware')
+const errorMiddleware = require('./middleware/errorMiddleware')
+const connectDb = require('./models/db.js')
+require('./models/db.js')
+dotenv.config()
+
 
 
 const app = express()
 
-
+app.set('view engine' , 'ejs')
+app.use(express.static(__dirname + "/views"));
+app.use(express.static(__dirname + "/public"));
 app.use(bodyParser.urlencoded({extended : true}))
 app.use(bodyParser.json())
 
-// routes
-app.use('/api/users', userRoutes)
-// view engine setup
-app.use(express.static(__dirname + "/views"));
-app.use(express.static(__dirname + "/public"));
+
+
+//routes
+app.get('/', ( req, res) => {
+    res.render("index")
+})
+app.use('/users' , userRoutes)
+app.use('/true' , attendanceRoutes) 
+app.use ( errorMiddleware.errorHandler, errorMiddleware.notFound)//middleware
 
 
 
-app.listen(process.env.PORT, (req, res) => {
-    console.log("new app is listening on port",process.env.PORT)
+const PORT = process.env.PORT || 8000
+app.listen(PORT, () => {
+    console.log(`New app running on port ${process.env.NODE_ENV}`)
 })

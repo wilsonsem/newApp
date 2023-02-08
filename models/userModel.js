@@ -3,17 +3,13 @@ const bcrypt = require('bcryptjs')
 
 //database schema for user
 const userSchema = new mongoose.Schema({
-    surnName:{
-        type:String,
-        required: false
-    },
     firstName:{
         type:String,
         required: true,
     },
-    otherNames:{
+    lastName:{
         type:String,
-        required: false,
+        required: true,
     },
     email: {
         type: String,
@@ -22,12 +18,23 @@ const userSchema = new mongoose.Schema({
       },
     password:{
         type:String,
+        trim: true,
         required: true,
+    },
+    cPassword:{
+      type:String,
+      trim: true,
+      required: true,
+  },
+  status:{
+    type:String,
+    required: true,
+  }
     }
-},{ timestamps: true})
+,{ timestamps: true})
 
-userSchema.methods.matchPassword = async function (enteredPassword){
-    return await bcrypt.compare(enteredPassword, this.password)
+userSchema.methods.matchPassword = async function(inputPassword){
+  return await bcrypt.compare(inputPassword, this.password)
   }
 
 userSchema.pre('save', async function (next) {
@@ -37,7 +44,6 @@ userSchema.pre('save', async function (next) {
   
     const salt = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password, salt)
-   
   })
   
   
