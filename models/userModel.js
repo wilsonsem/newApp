@@ -9,7 +9,7 @@ const userSchema = new mongoose.Schema({
     },
     firstName:{
         type:String,
-        required: true,
+        required: false,
     },
     otherNames:{
         type:String,
@@ -22,12 +22,14 @@ const userSchema = new mongoose.Schema({
       },
     password:{
         type:String,
+        trim: true,
         required: true,
+    },
     }
-},{ timestamps: true})
+,{ timestamps: true})
 
-userSchema.methods.matchPassword = async function (enteredPassword){
-    return await bcrypt.compare(enteredPassword, this.password)
+userSchema.methods.matchPassword = async function(inputPassword){
+  return await bcrypt.compare(inputPassword, this.password)
   }
 
 userSchema.pre('save', async function (next) {
@@ -37,7 +39,6 @@ userSchema.pre('save', async function (next) {
   
     const salt = await bcrypt.genSalt(10)
     this.password = await bcrypt.hash(this.password, salt)
-   
   })
   
   
