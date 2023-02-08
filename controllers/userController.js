@@ -3,54 +3,49 @@ const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
 const tokenUtil = require('../utils/generateToken')
 
-exports.getUsers = async(req, res) => {
-    const users = await User.find({}).sort({createdAt: -1})
-    if (users){
-        res.status(200).json(users)
-    }
+exports.showLogin = async(req, res) => {
+   res.render('login')
 }
 exports.userLogin = async(req, res) => {
     
-    // res.render("login")
-    // const { email, password } = req.body
     const data = {
         email : req.body.email,
         password : req.body.password
     }
     const user = await User.findOne({ email : req.body.email })
-    // console.log(user)
+
     if(user && (await user.matchPassword(data.password))){
-        // res.status(200).json({
-        //     _id: user._id,
-        //     firstName: user.firstName,
-        //     email: user.email,
-        //     token: tokenUtil.generateToken(user._id)
-        // })
-        res.render("index")
+        res.status(200).json({
+            _id: user._id,
+            firstName: user.firstName,
+            email: user.email,
+            token: tokenUtil.generateToken(user._id)
+        })
+        // res.render("index")
     }else{
-        return res.status(200).json({success: false})
+         res.status(200).json({success: false})
     }
 }
-    // else{
-    //     res.status(401)
-    //     throw new Error('user auth failed')
-        // res.send("Auth Failed")
-        // res.send(tokenUtil.generateToken(user._id))
-        // console.log(user)
-
     
 
+    
+exports.showSignup = async(req, res) => {
+    res.render('register')
+    }
 
-//Regiser a user
+//new user registration
 exports.userRegistration = async( req, res) => {
-    // const { firstName, email , Password} = req.body
+
     const data = {
         firstName: req.body.firstName,
+        lastName: req.body.lastName,
         email : req.body.email,
-        password : req.body.password
+        password : req.body.password,
+        cPassword : req.body.cPassword,
+        status: req.body.status
     }
    
-
+    console.log(data.status)
     const userExist = await User.findOne({email: req.body.email})
     if(userExist){
         res.status(401)
@@ -76,6 +71,7 @@ exports.userRegistration = async( req, res) => {
         throw new Error("Registration failed")
     }
 }
+
 
 exports.getUserProfile = async ( req, res) => {
 
