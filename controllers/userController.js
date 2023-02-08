@@ -46,7 +46,11 @@ exports.userRegistration = async( req, res) => {
         status: req.body.status
     }
    
-    console.log(data.status)
+    if( data.password !== data.cPassword){
+        res.status(401)
+        throw new Error("Password does not match")
+    }
+    
     const userExist = await User.findOne({email: req.body.email})
     if(userExist){
         res.status(401)
