@@ -17,6 +17,7 @@ router.route("/register")
 
 router.route("/profile")
     .get(authMiddleware.protect, controllers.getUserProfile)
-
+router.route("/logout")
+    .get()
 
 module.exports = router
