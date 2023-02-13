@@ -19,21 +19,20 @@ exports.userLogin = async(req, res) => {
     const user = await User.findOne({ email : req.body.email })
 
     if(user && (await user.matchPassword(data.password))){
-        let session = req.session
-        session.user = req.body.email
-        console.log(session.user)
-        console.log("logged in")
+        request.session.loggedin = true;
+		request.session.email = email;
+        // console.log(session)
+        // console.log("logged in")
         res.redirect("/true/attendance")
     }else{
          res.status(200).json({success: false})
     }
 }
     
-
-    
+   
 exports.showSignup = async(req, res) => {
     res.render('register')
-    }
+}
 
 //new user registration
 exports.userRegistration = async( req, res) => {

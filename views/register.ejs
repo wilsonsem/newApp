@@ -30,13 +30,9 @@
         <div class="container-fluid">
           <h2 class="p-3 text-center">Create an account to get started</h2>
             <div class="row d-flex justify-content-center">
-              <div class="col-md-offset-2 pr-4 mt-3">
-                  <img class="img-fluid avt" src="/img/avatar.png" alt="Profile Picture">
-                  
-              </div>
-                <div class="col-md-6 pl-4">
+                <div class="p-4">
                     <div class="text-center">
-                        <form class="mt-3" action="/users/register" method="post" enctype="multipart/form-data">
+                        <form class="mt-3" action="/users/register" method="post">
                             <div class="form-row">
                                 <div class="form-group col-md-6">
                                     <input type="text" class="form-control" name="firstName" placeholder="firstname">
@@ -76,7 +72,7 @@
                             </div>
                             <button type="submit" class="btn btn-primary mt-2">Sign up</button>
                             <div class="pt-4">
-                                <p>Have an account already? <a href="login.html">login</a></p>
+                                <p>Have an account already? <a href="/users/login">login</a></p>
                             </div>
                         </form>
                     </div>
