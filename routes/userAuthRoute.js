@@ -15,8 +15,9 @@ router.route("/register")
     .get(controllers.showSignup)
     .post(controllers.userRegistration)
 
-router.route("/profile")
-    .get(authMiddleware.protect, controllers.getUserProfile)
+router.route("/profile/:id")
+    .get(controllers.getUserProfile)
+    // authMiddleware.protect,
 router.route("/logout")
     .get()
 

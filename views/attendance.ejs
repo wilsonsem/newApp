@@ -18,7 +18,10 @@
         </button>
         <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
           <ul class="navbar-nav ml-auto mt-2">
-            <li class="nav-item">
+            <li class="nav-item d-flex">
+            <a class="nav-link" href="/users/profile/<%=user._id%>">
+                    <h2 class="ml-auto">Profile</h2>
+                </a>
                 <a class="nav-link" href="#">
                     <h2 class="ml-auto">LOGOUT</h2>
                 </a>
@@ -32,11 +35,11 @@
                 <div class="d-flex justify-content-center pt-2 ">
                     <div class="text-center">
                         <div class="">
-                            <h3 class="text-center">ROLL No: 01</h3>
+                            <h3 class="text-center">ROLL No: <%= user._id %></h3>
                             <img class="img-fluid rounded-circle avt" src="/img/avatar.png" alt="Profile Picture">
                         </div>
                         <div >
-                            <h3 class="text-center">SEMMWA WILSON</h3>
+                            <h3 class="text-center pt-4"><%= `${user.firstName} ${user.lastName}` %></h3>
                             <div class="d-flex justify-content-center pt-2">
                                 <div>
                                     <button type="button" id="present" class="btn btn-success btn-lg m-1" data-toggle="modal" data-target="#myModal">PRESENT</button>
