@@ -15,10 +15,11 @@
   .cardbody-color{
     background-color: #ebf2fa;
   }
-  
-  a{
+*/ 
+a{
     text-decoration: none;
-  } */
+    color: white!important;
+} 
 
   .navbar-custom{
     background: #cbe2ec;

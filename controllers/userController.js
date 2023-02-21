@@ -1,7 +1,11 @@
 const User = require('../models/userModel')
 const mongoose = require('mongoose')
 const bcrypt = require('bcryptjs')
+const session = require('express-session');
+const multer  = require('multer')
+const upload = multer({ dest: 'uploads/' })
 const tokenUtil = require('../utils/generateToken')
+
 
 exports.showLogin = async(req, res) => {
    res.render('login')
@@ -15,23 +19,21 @@ exports.userLogin = async(req, res) => {
     const user = await User.findOne({ email : req.body.email })
 
     if(user && (await user.matchPassword(data.password))){
-        res.status(200).json({
-            _id: user._id,
-            firstName: user.firstName,
-            email: user.email,
-            token: tokenUtil.generateToken(user._id)
-        })
-        // res.render("index")
+        request.session.loggedin = true;
+		request.session.email = email;
+        // console.log(session)
+        console.log("logged in")
+        res.render('attendance')
+
     }else{
          res.status(200).json({success: false})
     }
 }
     
-
-    
+   
 exports.showSignup = async(req, res) => {
     res.render('register')
-    }
+}
 
 //new user registration
 exports.userRegistration = async( req, res) => {
@@ -45,7 +47,11 @@ exports.userRegistration = async( req, res) => {
         status: req.body.status
     }
    
-    console.log(data.status)
+    if( data.password !== data.cPassword){
+        res.status(401)
+        throw new Error("Password does not match")
+    }
+    
     const userExist = await User.findOne({email: req.body.email})
     if(userExist){
         res.status(401)
@@ -57,14 +63,8 @@ exports.userRegistration = async( req, res) => {
     data.password = await bcrypt.hash(data.password, salt)
     const user = await User.insertMany([data])
     if(user){
-        console.log("sucessful")
-        // res.send({
-        //     _id : user._id,
-        //     firstName : user.firstName,
-        //     email: user.email,
-        //     isAdmin: user.isAdmin,
-        //     // token: tokenUtil.generateToken(user._id)
-        // })
+        console.log("reg sucessful")
+        // res.redirect("/users/login")
         res.render("login")
     }else{
         res.status(401)
@@ -74,7 +74,6 @@ exports.userRegistration = async( req, res) => {
 
 
 exports.getUserProfile = async ( req, res) => {
-
     const user = await User.findById(req.user.id)
 
     if(user){
@@ -88,5 +87,8 @@ exports.getUserProfile = async ( req, res) => {
         throw new Error('User not found')
     }
 }
-
+exports.logout = async (req , res) => {
+        req.session.destroy();
+        res.redirect('/');
+}
 module.exports = exports
