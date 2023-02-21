@@ -4,7 +4,7 @@ const bodyParser = require ('body-parser')
 const cookieParser = require("cookie-parser");
 const sessions = require ("express-session")
 const userRoutes = require('./routes/userAuthRoute.js')
-const attendanceRoutes = require('./routes/attendanceRoute')
+const atdRoutes = require('./routes/attendanceRoute.js')
 // const sessionMiddleware = require('./middleware/sessionMiddleware')
 const errorMiddleware = require('./middleware/errorMiddleware')
 const connectDb = require('./models/db.js')
@@ -29,7 +29,7 @@ app.get('/', ( req, res) => {
     res.render("index")
 })
 app.use('/users' , userRoutes)
-app.use('/true' , attendanceRoutes) 
+app.use('/true' , atdRoutes) 
 app.use(errorMiddleware.errorHandler, errorMiddleware.notFound)//middleware
 // app.use(sessionMiddleware.sessionMiddleware)
 const oneDay = 1000 * 60 * 60 * 24;

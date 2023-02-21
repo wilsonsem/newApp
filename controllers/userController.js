@@ -22,8 +22,9 @@ exports.userLogin = async(req, res) => {
         request.session.loggedin = true;
 		request.session.email = email;
         // console.log(session)
-        // console.log("logged in")
-        res.redirect("/true/attendance")
+        console.log("logged in")
+        res.render('attendance')
+
     }else{
          res.status(200).json({success: false})
     }
@@ -62,9 +63,9 @@ exports.userRegistration = async( req, res) => {
     data.password = await bcrypt.hash(data.password, salt)
     const user = await User.insertMany([data])
     if(user){
-        console.log("sucessful")
-        
-        res.redirect("/users/login")
+        console.log("reg sucessful")
+        // res.redirect("/users/login")
+        res.render("login")
     }else{
         res.status(401)
         throw new Error("Registration failed")

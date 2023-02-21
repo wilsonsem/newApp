@@ -1,15 +1,16 @@
 const express = require('express')
-const controllers = require('../controllers/attendanceController')
+const authControllers = require('../controllers/userController')
+const atdControllers = require('../controllers/attendanceController')
 require('../models/userModel')
-const authMiddleware = require('../middleware/authMiddleware')
+// const authMiddleware = require('../middleware/authMiddleware')
 const router = express.Router()
 //user registration route
 //get user profile route
 
 //user login route
  router.route('/attendance')
-        .get(controllers.showAttendancePage)
-        // .post()
+        .get(atdControllers.showAttendancePage)
+        .post(atdControllers.verifyPresentAtd)
 
 // router..route('/profile')get('/', authMiddleware.protect, controllers.getUserProfile)
 
