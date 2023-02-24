@@ -2,6 +2,7 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const userRoutes = require('./routes/userAuthRoutes');
 const atdRoutes = require('./routes/attendanceRoutes');
+const connectDB = require('./models/db')
 require('dotenv').config()
 const app = express();
 
@@ -14,7 +15,7 @@ app.use(express.static('public'))
 
 
 app.use('/rtwa/user', userRoutes)
-app.use('/rtwa/atd', attendanceRoutes)
+app.use('/rtwa/atd', atdRoutes)
 
 app.get('/', (req, res) => {
     res.render('index')

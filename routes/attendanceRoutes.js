@@ -3,7 +3,7 @@ const router = express.Router()
 const atdController = require('../controllers/attendanceController')
 
 
-router.route('/attendance')
+router.route('/')
     .get(atdController.showAttendancePage)
     // .post(userController.)
 
