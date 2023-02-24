@@ -1,7 +1,26 @@
+.navbar-custom{
+  background: #cbe2ec;
+}
+main{
+  height: 100vh;
+  background: #e1f0f7;
+}
+.avt{
+  height: 300px;
+  width: 300px;
+}
+h2,h3{
+  color: rgb(8, 8, 73)!important;
+}
+
 .btn-color{
     background-color: #0e1c36;
     color: #fff;
     
+  }
+  .image{
+    height: 200px;
+    width: 200px;
   }
   
   .profile-image-pic{
