@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <title>Rocketwares Attendance App</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1">
+    <link rel="stylesheet" type="text/css" media="screen" href="/css/style.css" />
+    <link rel="stylesheet" href="/css/bootstrap.min.css">
+</head>
+<body>
+    <nav class="navbar navbar-custom navbar-expand-lg">
+        <a class="navbar-brand" href="index.html">
+            <img src="/img/RWL.png" alt="">
+        </a>
+        <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarTogglerDemo02" aria-controls="navbarTogglerDemo02" aria-expanded="false" aria-label="Toggle navigation">
+          <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarTogglerDemo02">
+          <ul class="navbar-nav ml-auto mt-2">
+            <li class="nav-item">
+                <a class="nav-link" href="#">
+                    <h2 class="ml-auto">LOGOUT</h2>
+                </a>
+            </li>
+          </ul>
+        </div>
+      </nav>
+   <main>
+        <div class="container-fluid">
+            <div class="right">
+                <div class="d-flex justify-content-center pt-2 ">
+                    <div class="text-center">
+                        <div class="">
+                            <h3 class="text-center">ROLL No: 01</h3>
+                            <img class="img-fluid rounded-circle avt" src="/img/avatar.png" alt="Profile Picture">
+                        </div>
+                        <div >
+                            <h3 class="text-center">SEMMWA WILSON</h3>
+                            <div class="d-flex justify-content-center pt-2">
+                                <div>
+                                    <button type="button" id="present" class="btn btn-success btn-lg m-1" data-toggle="modal" data-target="#myModal">PRESENT</button>
+                                </div>
+                                <div>
+                                    <button type="button" id="absent" class="btn btn-danger btn-lg m-1" data-toggle="modal" data-target="#myModal">ABSENT</button>
+                                </div>
+                                <div>
+                                    <button type="button" id="sick" class="btn btn-warning btn-lg m-1" data-toggle="modal" data-target="#myModal">SICK</button>
+                                </div>
+                            </div>
+                        </div>
+                        <div class="modal" id="myModal" tabindex="-1" role="dialog">
+                            <div class="modal-dialog modal-dialog-centered" role="document">
+                            <div class="modal-content">
+                                <div class="modal-body text-center">
+                                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                                <h5 class="text-success">Response submitted successfully</h5>
+                                </div>
+                            </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </main>
+    <!-- <script src="/js/main.js"></script> -->
+    <script src="/jquery/jquery.js"></script>
+    <script src="/js/bootstrap.min.js"></script>
+</body>
+</html>
