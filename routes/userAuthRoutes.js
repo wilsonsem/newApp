@@ -4,8 +4,8 @@ const userController = require('../controllers/userController')
 
 
 router.route('/register')
-    .get(userController.showSignUp)
-    // .post(userController.)
+    // .get(userController.showSignUp)
+    .post(userController.registerUser)
 
 
 router.route('/login')
